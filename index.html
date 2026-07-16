@@ -111,10 +111,24 @@
         }
 
         .keyboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
-            gap: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
             margin-bottom: 20px;
+        }
+
+        .keyboard-row {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+        }
+
+        .keyboard-row.row-1 {
+            padding-left: 20px;
+        }
+
+        .keyboard-row.row-2 {
+            padding-left: 40px;
         }
 
         .key {
@@ -374,18 +388,31 @@
             const keyboard = document.getElementById('keyboard');
             keyboard.innerHTML = '';
 
-            ALPHABET.forEach(letter => {
-                const btn = document.createElement('button');
-                btn.className = 'key';
-                btn.textContent = letter;
-                btn.disabled = gameOver;
+            const rows = [
+                ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+                ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+                ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
+            ];
 
-                if (letterStates[letter]) {
-                    btn.classList.add(letterStates[letter]);
-                }
+            rows.forEach((row, rowIndex) => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = `keyboard-row row-${rowIndex}`;
 
-                btn.addEventListener('click', () => addLetter(letter));
-                keyboard.appendChild(btn);
+                row.forEach(letter => {
+                    const btn = document.createElement('button');
+                    btn.className = 'key';
+                    btn.textContent = letter;
+                    btn.disabled = gameOver;
+
+                    if (letterStates[letter]) {
+                        btn.classList.add(letterStates[letter]);
+                    }
+
+                    btn.addEventListener('click', () => addLetter(letter));
+                    rowDiv.appendChild(btn);
+                });
+
+                keyboard.appendChild(rowDiv);
             });
         }
 
