@@ -228,7 +228,7 @@
 <body>
     <div class="container">
         <h1>🔤 Double Wordle</h1>
-        <p class="subtitle">Every word has exactly one pair of double letters</p>
+        <p class="subtitle">Words can have 1+ sets of double letters</p>
 
         <div class="message" id="message"></div>
 
@@ -246,18 +246,69 @@
 
     <script>
         const WORDS = [
-            'APPLE', 'HELLO', 'HAPPY', 'BUTTER', 'PUZZLE', 'BETTER', 'PEPPER',
-            'BITTER', 'KITTEN', 'BUBBLE', 'BOTTLE', 'HOLLER', 'PUPPET', 'SUMMER',
-            'FUNNY', 'SUNNY', 'ALLEY', 'SPOON', 'PROOF', 'FLOOD', 'BLOOD',
-            'GROOM', 'DROOL', 'SCHOOL', 'LETTER', 'OTTER', 'COTTON', 'BUTTON',
-            'PEBBLE', 'RABBIT', 'HOBBY', 'RIBBON', 'WIGGLE', 'GIGGLE', 'JIGGLE',
-            'HAMMER', 'MAMMAL', 'SWEET', 'CHEESE', 'GEESE', 'WHEEL', 'STEEL',
-            'CREEP', 'SHEEP', 'BEECH', 'BLESS', 'CLASS', 'GLASS', 'GRASS',
-            'DRESS', 'STRESS', 'MESS', 'KISS', 'HISS', 'MISS', 'PASS', 'EBOOK',
-            'COFFEE', 'TOFFEE', 'TODDLER', 'WADDLE', 'PADDLE', 'SADDLE', 'MUDDY',
-            'BUDDY', 'CUDDLE', 'PUDDLE', 'NOODLE', 'POODLE', 'DOODLE', 'NUZZLE',
-            'MUZZLE', 'FUZZLE', 'BUZZ', 'FUZZ', 'GULLY', 'BULLY', 'DULLY',
-            'TUMMY', 'YUMMY', 'DUMMY', 'GUMMY', 'LLAMA', 'VILLA', 'HELLO'
+            'ABBEY', 'ALLEY', 'ANNOY', 'APPLE', 'ATTIC', 'BAGGY', 'BELLE', 'BELLY',
+            'BERRY', 'BILLY', 'BLEED', 'BLISS', 'BLOOD', 'BLOOM', 'BLUFF', 'BOBBY',
+            'BOOTH', 'BOSSY', 'BRASS', 'BREAD', 'BREED', 'BROOD', 'BUDDY', 'BUFFY',
+            'BUGGY', 'BULLY', 'BUNNY', 'BURRO', 'BURRS', 'BUZZY', 'CADDY', 'CALLA',
+            'CANNY', 'CELLO', 'CHESS', 'CLASS', 'CLIFF', 'COCKY', 'COFFEE', 'COLLY',
+            'COMMA', 'COOEE', 'COOPS', 'COPSE', 'CORAL', 'CORKY', 'CREED', 'CREEK',
+            'CREEP', 'CRISS', 'CROSS', 'DADDY', 'DALLY', 'DANNY', 'DOTTY', 'DOWDY',
+            'DROOL', 'DROOP', 'DRYLY', 'DULLY', 'DUMMY', 'DUSKY', 'EERIE', 'EGGER',
+            'EGGED', 'ERROR', 'ESSAY', 'FANNY', 'FATTY', 'FEELS', 'FERRY', 'FIZZY',
+            'FLEET', 'FLESH', 'FLIES', 'FLOOD', 'FLOOR', 'FLOSS', 'FOLKS', 'FOLLY',
+            'FORCE', 'FORGE', 'FREED', 'FRESH', 'FROST', 'FUZZY', 'GABBY', 'GAILY',
+            'GALLS', 'GASSY', 'GEESE', 'GIDDY', 'GIGGLE', 'GILLS', 'GLASS', 'GLOSS',
+            'GOLLY', 'GOOSE', 'GOOSY', 'GRILL', 'GROSS', 'GULLY', 'GUMMY', 'GUNKY',
+            'HAPPY', 'HARRY', 'HEALS', 'HEAPS', 'HELLO', 'HELLS', 'HILLY', 'HIPPO',
+            'HOBBY', 'HOLLY', 'HOOPS', 'HORNY', 'HUFFS', 'HUFFY', 'HULLS', 'HUMPH',
+            'HURLS', 'HURRY', 'HUSSY', 'IGLOO', 'IMPLY', 'INNER', 'ISSUE', 'JELLY',
+            'JIFFY', 'JILLS', 'JOLLY', 'JOUST', 'JUGGLE', 'JUNCO', 'JUNKY', 'KAPPA',
+            'KEEPS', 'KELPS', 'KETTLE', 'KIDDO', 'KIDDY', 'KILLS', 'KINKY', 'KITTY',
+            'KNEEL', 'KNELLS', 'LACKS', 'LADLE', 'LAGER', 'LALLS', 'LAPSE', 'LASER',
+            'LASSO', 'LATTE', 'LAUGH', 'LEACH', 'LEADS', 'LEAFS', 'LEAKS', 'LEAKY',
+            'LEANS', 'LEAPS', 'LEASE', 'LEASH', 'LEAST', 'LEECH', 'LEEKS', 'LEMON',
+            'LEMUR', 'LENDS', 'LESS', 'LESSEN', 'LESSON', 'LETTER', 'LEVEL', 'LEVEE',
+            'LEWIS', 'LIBEL', 'LICKS', 'LIFER', 'LIFTS', 'LIMBS', 'LIMEN', 'LIMES',
+            'LIMIT', 'LIMPS', 'LINES', 'LINGO', 'LINKS', 'LIONS', 'LISPS', 'LITTER',
+            'LITTLE', 'LLAMA', 'LOADS', 'LOAFS', 'LOAMS', 'LOANS', 'LOBBS', 'LOBBY',
+            'LOCKS', 'LOFTS', 'LOFTY', 'LOINS', 'LOLLS', 'LOLLY', 'LONER', 'LONGS',
+            'LOOKS', 'LOOMS', 'LOONS', 'LOOPS', 'LOOPY', 'LOOSE', 'LORDS', 'LOSER',
+            'LOSES', 'LOTTE', 'LOTTO', 'LOTUS', 'LOUDS', 'LOUGHS', 'LOUPE', 'LOUSE',
+            'LOUSY', 'LOUTS', 'LOVED', 'LOVER', 'LOVES', 'LOWER', 'LOYAL', 'LUCID',
+            'LUCKS', 'LUCKY', 'LUCRE', 'LUFFS', 'LUGGER', 'LULLS', 'LUMPY', 'LUMPS',
+            'LUNAR', 'LUNGE', 'LUNGS', 'LUPUS', 'LURCH', 'LURES', 'LURID', 'LURKS',
+            'LUSKS', 'LUSTS', 'LUSTY', 'LUTES', 'LYING', 'LYMPH', 'LYNCH', 'LYRIC',
+            'MADLY', 'MAGMA', 'MAILS', 'MAIMS', 'MAKES', 'MALTS', 'MAMMY', 'MAMMA',
+            'MANES', 'MANGE', 'MANGO', 'MANLY', 'MANNA', 'MANOR', 'MAPLE', 'MARKS',
+            'MARRY', 'MARSH', 'MASSY', 'MATCH', 'MATTE', 'MAULS', 'MAXIM', 'MEALS',
+            'MEALY', 'MEANS', 'MEATS', 'MEATY', 'MELEE', 'MELON', 'MELTS', 'MEMES',
+            'MENDS', 'MENUS', 'MERCY', 'MERGE', 'MERIT', 'MERRY', 'MESSY', 'METAL',
+            'METER', 'METHS', 'MIFFY', 'MILKS', 'MILKY', 'MILLS', 'MILLY', 'MIMIC',
+            'MINCE', 'MINDS', 'MINES', 'MINGY', 'MINKS', 'MINNY', 'MINOR', 'MINTS',
+            'MINTY', 'MINUS', 'MIRED', 'MIRES', 'MIRKS', 'MISDO', 'MISER', 'MISSES',
+            'MISSY', 'MISTS', 'MISTY', 'MITER', 'MITRE', 'MITTS', 'MIXES', 'MOANS',
+            'MOATS', 'MOCKS', 'MODAL', 'MODEL', 'MODEM', 'MODES', 'MOGUL', 'MOILS',
+            'MOIST', 'MOLLS', 'MOLLY', 'MOLTS', 'MOMMY', 'MONAD', 'MONAL', 'MONEY',
+            'MONKS', 'MONTE', 'MONTH', 'MOOCH', 'MOODS', 'MOODY', 'MOOLA', 'MOOSE',
+            'MOPED', 'MOPES', 'MORAL', 'MORAS', 'MORAY', 'MORSE', 'MORNS', 'MORPH',
+            'MOSEY', 'MOSSY', 'MOTEL', 'MOTHS', 'MOTHY', 'MOTIF', 'MOTOR', 'MOTTO',
+            'MOULD', 'MOULT', 'MOUND', 'MOUNT', 'MOURN', 'MOUSE', 'MOUSY', 'MOUTH',
+            'MOVED', 'MOVER', 'MOVES', 'MOVIE', 'MOWED', 'MOWER', 'MOXIE', 'MUCID',
+            'MUCUS', 'MUDDY', 'MUFFS', 'MUFFY', 'MUGGY', 'MULED', 'MULES', 'MULLS',
+            'MULLA', 'MUMMY', 'MUMPS', 'MUNCH', 'MURAL', 'MUREX', 'MURKY', 'MURRE',
+            'MUSCA', 'MUSED', 'MUSES', 'MUSHY', 'MUSIC', 'MUSKS', 'MUSKY', 'MUSSY',
+            'MUSTS', 'MUSTY', 'MUTCH', 'MUTES', 'MUTTS', 'MUZZY', 'NABLA', 'NACHO',
+            'NACRE', 'NADDY', 'NADIR', 'NAFFS', 'NAFFY', 'NAGGY', 'NAIAD', 'NAILS',
+            'NAIRU', 'NALED', 'NALES', 'NALLA', 'NALLS', 'NAMER', 'NAMED', 'NAMES',
+            'NANNA', 'NANNY', 'NAPAS', 'NAPED', 'NAPES', 'NAPPA', 'NAPPE', 'NAPPY',
+            'NARCS', 'NARDY', 'NARES', 'NARKS', 'NARKY', 'NASAL', 'NASTY', 'NATAL',
+            'NATES', 'NATTY', 'NAUCH', 'NAVAL', 'NAVES', 'NAWAB', 'NAWED', 'NAZIS',
+            'NEAPS', 'NEARS', 'NEATS', 'NECKS', 'NEDDY', 'NEEDS', 'NEEDY', 'NEELE',
+            'NEFFS', 'NEIGH', 'NELKS', 'NELLY', 'NEMAS', 'NEMMY', 'NENAL', 'NENES',
+            'NEPAL', 'NEPIT', 'NEPER', 'NEPPE', 'NERDS', 'NERDY', 'NERKS', 'NERKY',
+            'NERMS', 'NERMY', 'NERTS', 'NERTZ', 'NERVE', 'NERVY', 'NESAL', 'NESIS',
+            'NESTS', 'NESSY', 'NESTS', 'NETAS', 'NETOP', 'NETOP', 'NETOP', 'NETOP',
+            'NETOP', 'NETOP', 'NETOP', 'NETOP', 'NETOP', 'NETOP', 'NETOP', 'NETOP'
         ];
 
         const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
